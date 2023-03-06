@@ -22,6 +22,7 @@ export class MarcadoresComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.recuperarMarcadores();
   }
 
   ngAfterViewInit(): void {
@@ -37,8 +38,10 @@ export class MarcadoresComponent implements OnInit, AfterViewInit {
           .addTo(this.mapa);
   }
 
-  irMarcador(){
-    
+  irMarcador(marker : Marcador){
+    this.mapa.flyTo({ 
+      center: marker.marcador.getLngLat()
+    });
   }
 
   agregarMarcador(){
@@ -54,5 +57,15 @@ export class MarcadoresComponent implements OnInit, AfterViewInit {
       color: color,
       marcador: nuevo
     });
+
+    this.guardarMarcadores();
   }
+
+  guardarMarcadores() {
+    localStorage.setItem('marcadores', JSON.stringify(this.marcadores));
+  }
+
+  recuperarMarcadores() {
+  }
+
 }
