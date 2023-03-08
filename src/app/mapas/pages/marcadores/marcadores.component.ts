@@ -62,6 +62,16 @@ export class MarcadoresComponent implements OnInit, AfterViewInit {
       marcador: nuevo
     });
 
+    nuevo.on('dragend', () => this.guardarMarcadores())
+
+    this.guardarMarcadores();
+  }
+
+  borrarMarcador(i : number){
+    this.marcadores[i].marcador?.remove();
+
+    this.marcadores.splice(i, 1);
+
     this.guardarMarcadores();
   }
 
@@ -99,6 +109,8 @@ export class MarcadoresComponent implements OnInit, AfterViewInit {
         color: m.color,
         marcador: nuevo
       });
+
+      nuevo.on('dragend', () => this.guardarMarcadores())
 
     })
 
